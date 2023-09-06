@@ -86,7 +86,8 @@ int main() {
 堆的大小通常比堆疊大得多，並且可以根據需要進行動態擴展。
 堆上的記憶體分配和釋放需要手動管理。在C語言中，您可以使用 malloc、free、calloc 和 realloc 等函式來分配和釋放堆上的記憶體。
 
-![](https://hackmd.io/_uploads/SJ8LpMXR3.png)
+![image](https://github.com/Shao-En/first/assets/125601397/055ad8b8-b739-45c8-8125-6e9182ade1e5)
+
 
 * text：程式碼
 文字區段（text segment）也稱為程式碼區段（code segment），這裡存放的是可執行的 CPU 指令（instructions）。
@@ -106,19 +107,30 @@ int main() {
 heap 區段的記憶體空間用於儲存動態配置的變數，例如 C 語言的 malloc 以及 C++ 的 new 所建立的變數都是儲存於此。
 堆疊區段一般的狀況會從高記憶體位址往低記憶體位址成長，而 heap 剛好從對面以相反的方向成長。
 
-![](https://hackmd.io/_uploads/rJ_ipGQ0h.png)
+![image](https://github.com/Shao-En/first/assets/125601397/dfa3a134-b26a-4f56-84df-5dfcb86485ef)
+
 
 五、動態記憶體配置：
 在C語言中，您可以使用函式 malloc、calloc 和 realloc 來動態分配記憶體。
 * malloc（memory allocation）函式用於分配指定大小的連續記憶體塊。它接受一個參數，即要分配的字節數，並返回一個指向新分配記憶體的指標。例如：
-![](https://hackmd.io/_uploads/SkSe74X03.png)
-* calloc（contiguous allocation）函式也用於分配連續記憶體塊，但它會初始化所有位元組為零。它接受兩個參數，分別是元素的個數和每個元素的大小。例如：![](https://hackmd.io/_uploads/SkLWQNm0n.png)
+```c=
+int *arr = (int *)malloc(5 * sizeof(int));
+```
+* calloc（contiguous allocation）函式也用於分配連續記憶體塊，但它會初始化所有位元組為零。它接受兩個參數，分別是元素的個數和每個元素的大小。例如:
+```c=
+int *arr = (int *)calloc(5 * sizeof(int));
+```
 
 使用動態分配函式分配的記憶體需要在使用完畢後釋放，以防止記憶體洩漏（memory leaks）。
-* 使用 free 函式來釋放動態分配的記憶體。它接受一個指向動態分配記憶體的指標作為參數。例如：![](https://hackmd.io/_uploads/BJFVXVQ03.png)
+* 使用 free 函式來釋放動態分配的記憶體。它接受一個指向動態分配記憶體的指標作為參數。例如：
+```c=
+free(arr);
+```
 
 如果需要更改已分配記憶體的大小，可以使用 realloc 函式。它接受兩個參數，一個是現有記憶體的指標，另一個是新的字節數。例如：![](https://hackmd.io/_uploads/BkbvQ4XAn.png)
-
+```c=
+arr = (int *)realloc(arr, 10 * sizeof(int));
+```
 分配記憶體注意事項:
 * 動態記憶體分配和釋放是您的責任。如果您成功分配了記憶體，則應該在不再需要它時使用 free 釋放它，以避免記憶體洩漏。
 * 當動態分配記憶體時，請確保檢查分配是否成功。malloc 和 calloc 可能無法分配所需的記憶體，它們可能會返回 NULL，因此應該檢查返回值。
@@ -155,14 +167,23 @@ heap 區段的記憶體空間用於儲存動態配置的變數，例如 C 語言
 * 按位AND（&）：將兩個位元做AND操作，產生新的位元。
 * 按位OR（|）：將兩個位元做OR操作，產生新的位元。
 * 按位XOR（^）：將兩個位元做XOR操作，產生新的位元。
-這個運算將兩個位元進行XOR（異或）操作，只有當兩個位元不相同時，結果位元才為1。![](https://hackmd.io/_uploads/HJXDENQA3.png)
+這個運算將兩個位元進行XOR（異或）操作，只有當兩個位元不相同時，結果位元才為1。
+```c=
+int a = 12; //      0b 01100
+int b = 25; //      0b 11001
+result = a ^ b; //  0b 10101
+```
 * 按位NOT（~）：反轉位元的值，1變為0，0變為1。
 * 位元左移（<<）和右移（>>）：將位元向左或向右移動指定的位數。
 
 說明如何使用位址運算來進行位元級操作:
 1.	位元運算：
 假設您有一個整數，並且想要對其二進位表示進行位元運算。您可以使用位址運算和位元遮罩來實現這一目標。例如，要將整數中的第3位（從右邊數）設置為1，可以使用以下方式：
-![](https://hackmd.io/_uploads/SJMnSEX03.png)
+```c=
+int a = 12; //      0b 01100
+int b = 25; //      0b 11001
+result = a ^ b; //  0b 10101
+```
 
 2.	位元複製：
 要複製一個整數的某些位元到另一個整數，您可以使用位元遮罩和位址運算。例如，要複製第2至5位（含）的位元到另一個整數，可以使用以下方式：
