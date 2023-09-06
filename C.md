@@ -187,11 +187,20 @@ result = a ^ b; //  0b 10101
 
 2.	位元複製：
 要複製一個整數的某些位元到另一個整數，您可以使用位元遮罩和位址運算。例如，要複製第2至5位（含）的位元到另一個整數，可以使用以下方式：
-![](https://hackmd.io/_uploads/Skp2S4m0h.png)
+```c=
+int source = 0x3A; //              0b 0011 1010
+int mask = 0x1E; //                0b 0001 1110
+result = (source & mask) >> 1; //  0b 0000 1101
+```
+
 3.	位元儲存：
 要將一個整數的某些位元儲存到另一個整數，可以使用位元遮罩和位址運算。例如，要將4個位元的值儲存到一個整數中，可以使用以下方式：
 利用& 1111 … 1111 
-
+```c=
+int source = 0x3A; //              0b 0011 1010
+int mask = 0xff; //                0b 1111 1111
+result = (source & mask);//        0b 0011 1010
+```
 七、多執行緒和同步：
 •	說明多執行緒程式設計的基本概念，以及如何使用C語言的線程庫。
 1.	執行緒： 執行緒是操作系統中執行程序的基本單位。一個進程可以包含多個執行緒，這些執行緒共享進程的資源，如記憶體空間，但每個執行緒都有自己的執行緒上下文和程式計數器。執行緒可以同時運行，但必須受到操作系統的管理和調度。
@@ -245,40 +254,49 @@ result = a ^ b; //  0b 10101
 一、
 結構定義和初始化：結構的定義和初始化的理解。
 Q： 請定義一個名為Student的結構，該結構包含學生的姓名（name）、年齡（age）和學號（studentID）這三個成員變數。然後初始化一個Student結構變數，姓名為"John"，年齡為20，學號為12345。
-![](https://hackmd.io/_uploads/BJ94MHQC3.png)
+![image](https://github.com/Shao-En/first/assets/125601397/287465d3-914c-4755-9e20-a39cc5b5325c)
+
 
 二、	訪問結構成員： 從結構變數中讀取特定成員的值。
-![](https://hackmd.io/_uploads/H1WYjw7Ch.png)
+![image](https://github.com/Shao-En/first/assets/125601397/e7191fe8-71aa-4aa5-be07-89b1a9e2300d)
+
 
 三、	指向結構的指標： 指向結構的指標的概念，並能夠使用指標來訪問結構的成員。
 Q： 請定義一個名為Student的結構，該結構包含學生的姓名（name）和年齡（age）這兩個成員變數。然後 創建一個Student結構變數並初始化，姓名為"Bob"，年齡為20。接著，請使用指向結構的指標來訪問結構變數的姓名成員並輸出。
-![](https://hackmd.io/_uploads/HyP5oDQAh.png)
+![image](https://github.com/Shao-En/first/assets/125601397/60781dad-fcb6-494e-b879-5b39ee39bd66)
+
 
 四、	結構內含結構： 結構的能力。問題可能要求在結構中包含另一個結構，並對其進行初始化和訪問。
 結構嵌套是一種將一個結構作為另一個結構的成員的概念。這樣可以創建更複雜的數據結構，將相關的數據分組存儲。
-![](https://hackmd.io/_uploads/B1X_nwXR2.png)
+![image](https://github.com/Shao-En/first/assets/125601397/8a1d3657-c047-4eb9-a215-514bcd1fc107)
+
 
 
 五、	結構與指標運算符： 考察候選人使用指標運算符（->）訪問結構指標的成員。候選人可能會被要求使用結構指標來訪問成員。
 結構指標與指標運算符（->）是在C語言中用來訪問結構指標的成員的重要概念。通過結構指標，我們可以動態地訪問結構的成員，而不必通過結構變數名稱進行訪問。
-![](https://hackmd.io/_uploads/SJFF2vQC3.png)
+![image](https://github.com/Shao-En/first/assets/125601397/c9e2e853-3336-4405-96e0-a80ef0db3b0e)
+
 
 六、	動態分配結構： 考察候選人如何在堆上動態分配結構，以及如何使用該結構。這可能涉及到malloc和free函數的使用。
-![](https://hackmd.io/_uploads/H1Ej2Dm0n.png)
+![image](https://github.com/Shao-En/first/assets/125601397/2ccefc95-22a3-4424-a739-29c1abe060d9)
+
 
 
 七、	結構和記憶體管理： 考察候選人對結構和記憶體管理的理解。問題可能要求候選人避免內存洩漏，適時釋放動態分配的結構記憶體。
 1.	動態分配結構：動態分配一個結構 Student 的記憶體。結構 Student 包含 name（字符串）和 age（整數）成員。確保在完成使用後釋放記憶體，以避免內存洩漏。![](https://hackmd.io/_uploads/BJOh3vXAh.png)
 2.	結構陣列的內存管理：如果您創建一個結構的陣列，例如 Student students[10]，該如何確保釋放這個陣列的記憶體？請編寫代碼來動態分配和釋放這個結構陣列的記憶體。
-	動態分配的結構陣列
-![](https://hackmd.io/_uploads/Hy2-6wmC2.png)
+動態分配的結構陣列
+![image](https://github.com/Shao-En/first/assets/125601397/4614f412-26cd-4b75-a1a0-d275c48d7138)
+
 snprintf(students[i].name, sizeof(students[i].name), "學生 %d", i + 1); 這行程式碼將學生結構中的 name 成員初始化為一個字串。snprintf 函數是一個安全的字串格式化函數，它將格式化的字串 "學生 %d" 替換為 "學生 1"、"學生 2" 和 "學生 3"，並將結果存儲在對應學生的 name 成員中。sizeof(students[i].name) 用於確保我們不會溢出 name 陣列的空間。
 3.	結構成員的動態記憶體：如果結構中的某個成員是指向動態分配記憶體的指標，您如何確保在結構釋放時也釋放該指標所引用的內存？
-![](https://hackmd.io/_uploads/H1qQpvX0n.png)
+![image](https://github.com/Shao-En/first/assets/125601397/bb09c8f9-c169-4f9c-a736-d2f15d87fd39)
+
 
 
 八、	結構陣列： 如何定義和使用結構陣列。問題可能要求將多個結構存儲在陣列中並進行操作。
-![](https://hackmd.io/_uploads/Hko4TDX0n.png)
+![image](https://github.com/Shao-En/first/assets/125601397/a8cad705-6550-428c-b3cd-a14b9c88020f)
+
 
 
 
